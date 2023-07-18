@@ -15,7 +15,11 @@ def download(link):
         return post_default("Bad link!")
 
     url = "http://coub.com/api/v2/coubs/" + vid_id
-    resp = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+        'Accept': 'application/json'
+    }
+    resp = requests.get(url, headers=headers)
     if resp.status_code != 200:
         return post_default("Bad response code: " + str(resp.status_code))
     page = json.loads(resp.content)
